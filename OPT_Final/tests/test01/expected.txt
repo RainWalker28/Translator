@@ -1,0 +1,137 @@
+1     1       401     PROGRAM
+1     9       1001    QWR   
+1     12      59      ;     
+2     1       404     CONST 
+2     7       1002    VAR1  
+2     12      61      =     
+2     14      501     1234  
+2     18      59      ;     
+3     1       1003    VAR2  
+3     6       61      =     
+3     8       501     1234  
+3     12      59      ;     
+3     14      1004    VAR3  
+3     19      61      =     
+3     21      502     12345 
+3     26      59      ;     
+4     1       402     BEGIN 
+5     1       1005    VAR5  
+5     6       301     :=    
+5     8       503     123   
+5     11      59      ;     
+6     1       1006    VAR6  
+6     6       301     :=    
+6     8       504     -123  
+6     11      59      ;     
+7     1       403     END   
+7     4       46      .     
+
+
+<signal-program>
+..<program>
+....401 PROGRAM
+....<procedure-identifier>
+......<identifier>
+........1001 QWR
+....59 ;
+....<block>
+......<declarations>
+........<constant-declarations>
+..........404 CONST
+..........<constant-declarations-list>
+............<constant-declaration>
+..............<constant-identifier>
+................<identifier>
+..................1002 VAR1
+..............61 =
+..............<constant>
+................<unsigned-integer>
+..................501 1234
+..............59 ;
+............<constant-declarations-list>
+..............<constant-declaration>
+................<constant-identifier>
+..................<identifier>
+....................1003 VAR2
+................61 =
+................<constant>
+..................<unsigned-integer>
+....................501 1234
+................59 ;
+..............<constant-declarations-list>
+................<constant-declaration>
+..................<constant-identifier>
+....................<identifier>
+......................1004 VAR3
+..................61 =
+..................<constant>
+....................<unsigned-integer>
+......................502 12345
+..................59 ;
+................<constant-declarations-list>
+..................<empty>
+......402 BEGIN
+......<statement_list>
+........<statement>
+..........<variable-identifier>
+............<identifier>
+..............1005 VAR5
+..........301 :=
+..........<constant>
+............<unsigned-integer>
+..............503 123
+..........59 ;
+........<statement_list>
+..........<statement>
+............<variable-identifier>
+..............<identifier>
+................1006 VAR6
+............301 :=
+............<constant>
+..............<unsigned-integer>
+................504 -123
+............59 ;
+..........<statement_list>
+............<empty>
+......403 END
+....46 .
+
+Error table:
+
+
+User Identificator Table: 
+Name    Code
+QWR---1001
+VAR1---1002
+VAR2---1003
+VAR3---1004
+VAR5---1005
+VAR6---1006
+
+Constants Table: 
+Name    Code
+1234---501
+12345---502
+123---503
+-123---504
+
+
+DATA SEGMENT
+VAR1 DWORD 1234
+VAR2 DWORD 1234
+VAR3 DWORD 12345
+DATA ENDS
+
+CODE SEGMENT
+ASSUME CS:CODE, DS:DATA
+QWR:
+push ebp
+mov ebp, esp
+mov VAR5,123
+mov VAR6,-123
+nop
+
+pop ebp
+ret
+CODE ENDS
+
